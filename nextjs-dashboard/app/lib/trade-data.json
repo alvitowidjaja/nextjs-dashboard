@@ -1,0 +1,173 @@
+[
+  {
+    "id": "TRD-5420",
+    "date": "2026-05-11",
+    "ticker": "WIN",
+    "direction": "Short",
+    "setupType": "Change of Character",
+    "rrRatio": "2.5:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-8240",
+    "date": "2026-05-11",
+    "ticker": "AAPL",
+    "direction": "Long",
+    "setupType": "Fair Value Gap",
+    "rrRatio": "1.4:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-2866",
+    "date": "2026-05-11",
+    "ticker": "EUR/USD",
+    "direction": "Long",
+    "setupType": "Fair Value Gap",
+    "rrRatio": "1.4:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-7838",
+    "date": "2026-05-11",
+    "ticker": "SPY",
+    "direction": "Long",
+    "setupType": "Fair Value Gap",
+    "rrRatio": "1.5:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-4388",
+    "date": "2026-05-11",
+    "ticker": "AAPL",
+    "direction": "Long",
+    "setupType": "Change of Character",
+    "rrRatio": "2.3:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-3837",
+    "date": "2026-05-11",
+    "ticker": "WIN",
+    "direction": "Short",
+    "setupType": "Macro Catalyst",
+    "rrRatio": "1.8:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-7510",
+    "date": "2026-05-11",
+    "ticker": "WIN",
+    "direction": "Long",
+    "setupType": "Order Block Mitigation",
+    "rrRatio": "4.0:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-948",
+    "date": "2026-05-11",
+    "ticker": "NQ1!",
+    "direction": "Long",
+    "setupType": "Liquidity Sweep",
+    "rrRatio": "1.5:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-2324",
+    "date": "2026-05-11",
+    "ticker": "AAPL",
+    "direction": "Short",
+    "setupType": "Macro Divergence",
+    "rrRatio": "3.3:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-4737",
+    "date": "2026-05-11",
+    "ticker": "WIN",
+    "direction": "Short",
+    "setupType": "Algo Trap",
+    "rrRatio": "2.0:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-4719",
+    "date": "2026-05-11",
+    "ticker": "SPY",
+    "direction": "Long",
+    "setupType": "Macro Divergence",
+    "rrRatio": "2.8:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-1092",
+    "date": "2026-05-04",
+    "ticker": "EUR/USD",
+    "direction": "Long",
+    "setupType": "Liquidity Sweep",
+    "rrRatio": "2.5:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-1091",
+    "date": "2026-05-04",
+    "ticker": "SPY",
+    "direction": "Short",
+    "setupType": "Algo Trap",
+    "rrRatio": "1.5:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-1090",
+    "date": "2026-05-03",
+    "ticker": "XAU/USD",
+    "direction": "Long",
+    "setupType": "Macro Divergence",
+    "rrRatio": "0.8:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-1089",
+    "date": "2026-05-03",
+    "ticker": "GBP/JPY",
+    "direction": "Short",
+    "setupType": "Liquidity Sweep",
+    "rrRatio": "3.0:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-1088",
+    "date": "2026-05-02",
+    "ticker": "AAPL",
+    "direction": "Long",
+    "setupType": "Algo Trap",
+    "rrRatio": "1.0:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-1087",
+    "date": "2026-05-02",
+    "ticker": "BTC/USD",
+    "direction": "Long",
+    "setupType": "Macro Divergence",
+    "rrRatio": "4.2:1",
+    "status": "Win"
+  },
+  {
+    "id": "TRD-1086",
+    "date": "2026-05-01",
+    "ticker": "NQ1!",
+    "direction": "Short",
+    "setupType": "Liquidity Sweep",
+    "rrRatio": "1.2:1",
+    "status": "Loss"
+  },
+  {
+    "id": "TRD-1085",
+    "date": "2026-05-01",
+    "ticker": "ES1!",
+    "direction": "Long",
+    "setupType": "Macro Divergence",
+    "rrRatio": "2.1:1",
+    "status": "Win"
+  }
+]

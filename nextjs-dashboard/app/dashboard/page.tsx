@@ -1,5 +1,6 @@
 import SessionTracker from '@/app/ui/dashboard/session-tracker';
 import Link from 'next/link';
+import { TradingTerminal } from '@/app/ui/TradingTerminal';
 
 async function getAAPLData() {
   const apiKey = process.env.POLYGON_API_KEY;
@@ -44,7 +45,6 @@ export default async function Page() {
 
   return (
     <main className="flex w-full flex-col">
-      {/* Dashboard Header */}
       <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Trading Dashboard</h1>
@@ -54,10 +54,8 @@ export default async function Page() {
       </div>
 
 
-      {/* Grid Layout */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
 
-        {/* AAPL Card */}
         <Link href="/dashboard/AAPL" className="block transition-transform hover:scale-[1.02]">
           <div className="relative h-full overflow-hidden rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)] ring-1 ring-gray-900/5 dark:ring-slate-700 transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:hover:shadow-none">
             <div className="flex items-center justify-between">
@@ -82,7 +80,6 @@ export default async function Page() {
           </div>
         </Link>
 
-        {/* TSLA Placeholder */}
         <Link href="/dashboard/TSLA" className="block transition-transform hover:scale-[1.02]">
           <div className="flex h-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 p-6 text-center hover:bg-gray-100 dark:hover:bg-slate-800/80 transition-colors">
             <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500">TSLA</h3>
@@ -90,7 +87,6 @@ export default async function Page() {
           </div>
         </Link>
 
-        {/* GBP/JPY Placeholder */}
         <Link href="/dashboard/GBP-JPY" className="block transition-transform hover:scale-[1.02]">
           <div className="flex h-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 p-6 text-center hover:bg-gray-100 dark:hover:bg-slate-800/80 transition-colors">
             <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500">GBP/JPY</h3>
@@ -98,7 +94,6 @@ export default async function Page() {
           </div>
         </Link>
 
-        {/* EUR/AUD Placeholder */}
         <Link href="/dashboard/EUR-AUD" className="block transition-transform hover:scale-[1.02]">
           <div className="flex h-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 p-6 text-center hover:bg-gray-100 dark:hover:bg-slate-800/80 transition-colors">
             <h3 className="text-sm font-semibold text-gray-400 dark:text-gray-500">EUR/AUD</h3>
@@ -106,6 +101,9 @@ export default async function Page() {
           </div>
         </Link>
 
+      </div>
+      <div className="mt-8">
+        <TradingTerminal />
       </div>
     </main>
   );
