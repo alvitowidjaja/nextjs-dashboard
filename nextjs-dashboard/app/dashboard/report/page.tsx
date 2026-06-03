@@ -33,7 +33,7 @@ export default function ReportPage() {
     setGenerating(true);
     setGenerationError(null);
     try {
-      const response = await fetch('http://localhost:4000/api/reports/macro', { cache: 'no-store' });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reports/macro`, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error('Failed to generate AI macro report');
       }
@@ -55,12 +55,12 @@ export default function ReportPage() {
   };
 
   const handleDownload = () => {
-    window.open('http://localhost:4000/api/journal/export', '_blank');
+    window.open(`${process.env.NEXT_PUBLIC_API_URL}/api/journal/export`, '_blank');
   };
 
   const handleExportCSV = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/ledger', { cache: 'no-store' });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ledger`, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error('Failed to fetch ledger data');
       }
@@ -127,7 +127,7 @@ export default function ReportPage() {
   useEffect(() => {
     async function fetchTrades() {
       try {
-        const response = await fetch('http://localhost:4000/api/ledger', { cache: 'no-store' });
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ledger`, { cache: 'no-store' });
         if (!response.ok) {
           throw new Error('Failed to fetch ledger trades');
         }

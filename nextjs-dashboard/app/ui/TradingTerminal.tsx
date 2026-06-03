@@ -68,7 +68,7 @@ export function TradingTerminal() {
     const loadHistoryAndConnect = async () => {
       try {
         // Fetch real historical data from local Express API
-        const response = await fetch('http://localhost:4000/api/history');
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/history`);
         if (!response.ok) {
           throw new Error(`Failed to fetch history: ${response.status}`);
         }

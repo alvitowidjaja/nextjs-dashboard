@@ -131,7 +131,7 @@ export default async function TradeIdeasFeed() {
   let isIdeasError = false;
 
   try {
-    const response = await fetch('http://localhost:4000/api/trades', { cache: 'no-store' });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trades`, { cache: 'no-store' });
     console.log(response);
     const json = await response.json();
     ideas = json.data;

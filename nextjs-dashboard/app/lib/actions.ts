@@ -14,7 +14,7 @@ export async function createTradeIdea(formData: FormData) {
 
   const data = { ticker, direction, setup_type, image_url, entry_price, stop_loss, take_profit };
 
-  await fetch('http://localhost:4000/api/trades', {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trades`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
@@ -25,7 +25,7 @@ export async function createTradeIdea(formData: FormData) {
 }
 
 export async function deleteTradeIdea(id: string | number) {
-  await fetch(`http://localhost:4000/api/trades/${id}`, {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trades/${id}`, {
     method: 'DELETE',
   });
   revalidatePath('/dashboard/customers');
@@ -42,7 +42,7 @@ export async function updateTradeIdea(id: string, formData: FormData) {
 
   const data = { ticker, direction, setup_type, image_url, entry_price, stop_loss, take_profit };
 
-  await fetch(`http://localhost:4000/api/trades/${id}`, {
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trades/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),

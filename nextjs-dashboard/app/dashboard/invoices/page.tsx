@@ -20,7 +20,7 @@ export default async function TradeExecutionLedger(props: { searchParams?: Promi
 
   let trades: Trade[] = [];
   try {
-    const res = await fetch('http://localhost:4000/api/ledger', { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ledger`, { cache: 'no-store' });
     if (res.ok) {
       const dbTrades = await res.json();
       trades = dbTrades.map((trade: any) => ({

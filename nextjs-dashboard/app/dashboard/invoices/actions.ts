@@ -23,7 +23,7 @@ export async function createTrade(formData: FormData) {
   });
 
   try {
-    const res = await fetch('http://localhost:4000/api/ledger', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ledger`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export async function deleteTradeFromJSON(tradeId: string) {
   console.log("🚨 DELETING DATA FROM DB:", tradeId);
 
   try {
-    const res = await fetch(`http://localhost:4000/api/ledger/${tradeId}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ledger/${tradeId}`, {
       method: 'DELETE',
     });
 

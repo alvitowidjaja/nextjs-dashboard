@@ -12,7 +12,7 @@ export default async function PricingWidget() {
   let isError = false;
 
   try {
-    const response = await fetch('http://localhost:4000/api/prices', { cache: 'no-store' });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/prices`, { cache: 'no-store' });
     if (!response.ok) throw new Error('API Error');
     const json = await response.json();
     prices = json.data;

@@ -6,7 +6,7 @@ export default async function EditTradeIdea({ params }: { params: Promise<{ id: 
 
   let idea;
   try {
-    const response = await fetch(`http://localhost:4000/api/trades/${id}`, { cache: 'no-store' });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/trades/${id}`, { cache: 'no-store' });
     console.log(response);
     if (!response.ok) {
       if (response.status === 404) return notFound();
