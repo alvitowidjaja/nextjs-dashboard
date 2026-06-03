@@ -12,6 +12,10 @@ export interface Trade {
   setupType: string;
   rrRatio: string;
   status: TradeStatus;
+  entry_price?: number | string | null;
+  stop_loss?: number | string | null;
+  take_profit?: number | string | null;
+  exit_price?: number | string | null;
 }
 
 export async function getTrades(): Promise<Trade[]> {

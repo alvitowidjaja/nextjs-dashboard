@@ -1,10 +1,18 @@
 import { redirect } from 'next/navigation';
 import ThemeBox from '@/app/dashboard/ThemeBox';
 import { authenticate } from '@/app/login/actions';
+import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950 p-4">
+    <main className="relative flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950 p-4">
+      <Link
+        href="/"
+        className="absolute top-6 left-6 flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+      >
+        <span>&larr;</span> Back to Home
+      </Link>
+
       {/* Theme toggle */}
       <ThemeBox />
 

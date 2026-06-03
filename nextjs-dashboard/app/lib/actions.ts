@@ -8,8 +8,11 @@ export async function createTradeIdea(formData: FormData) {
   const direction = formData.get('direction') as string;
   const setup_type = formData.get('setup_type') as string;
   const image_url = formData.get('image_url') as string;
+  const entry_price = formData.get('entry_price') as string;
+  const stop_loss = formData.get('stop_loss') as string;
+  const take_profit = formData.get('take_profit') as string;
 
-  const data = { ticker, direction, setup_type, image_url };
+  const data = { ticker, direction, setup_type, image_url, entry_price, stop_loss, take_profit };
 
   await fetch('http://localhost:4000/api/trades', {
     method: 'POST',
@@ -33,8 +36,11 @@ export async function updateTradeIdea(id: string, formData: FormData) {
   const direction = formData.get('direction') as string;
   const setup_type = formData.get('setup_type') as string;
   const image_url = formData.get('image_url') as string;
+  const entry_price = formData.get('entry_price') as string;
+  const stop_loss = formData.get('stop_loss') as string;
+  const take_profit = formData.get('take_profit') as string;
 
-  const data = { ticker, direction, setup_type, image_url };
+  const data = { ticker, direction, setup_type, image_url, entry_price, stop_loss, take_profit };
 
   await fetch(`http://localhost:4000/api/trades/${id}`, {
     method: 'PUT',

@@ -16,27 +16,30 @@ interface Idea {
   status?: IdeaStatus;
   created_at: string;
   image_url?: string;
+  entry_price?: number | string;
+  stop_loss?: number | string;
+  take_profit?: number | string;
 }
 
 function IdeaCard({ idea }: { idea: Idea }) {
   return (
-    <div className="flex flex-col bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg hover:border-slate-700 transition-colors duration-200 relative">
+    <div className="flex flex-col bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-lg hover:border-slate-300 dark:hover:border-slate-700 transition-colors duration-200 relative">
       <div className="absolute top-2 right-2 z-10 flex items-center gap-1">
-        <Link 
+        <Link
           href={`/dashboard/customers/${idea.id}/edit`}
-          className="text-slate-500 hover:text-blue-500 text-sm transition-colors bg-slate-900/80 rounded-full w-6 h-6 flex items-center justify-center font-bold"
+          className="text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 text-sm transition-colors bg-slate-100/80 dark:bg-slate-900/80 rounded-full w-6 h-6 flex items-center justify-center font-bold"
           title="Edit Idea"
         >
           ✎
         </Link>
         <form action={deleteTradeIdea.bind(null, idea.id)}>
-          <button type="submit" className="text-slate-500 hover:text-red-500 text-sm transition-colors bg-slate-900/80 rounded-full w-6 h-6 flex items-center justify-center font-bold" title="Delete Idea">
+          <button type="submit" className="text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 text-sm transition-colors bg-slate-100/80 dark:bg-slate-900/80 rounded-full w-6 h-6 flex items-center justify-center font-bold" title="Delete Idea">
             ✕
           </button>
         </form>
       </div>
       {/* Chart Placeholder Image Area */}
-      <div className="w-full aspect-video bg-slate-800 flex flex-col items-center justify-center text-slate-500 relative group">
+      <div className="w-full aspect-video bg-slate-100 dark:bg-slate-800 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 relative group">
         {idea.image_url ? (
           <img src={idea.image_url} alt={idea.title || idea.ticker} className="w-full h-full object-cover" />
         ) : (
@@ -51,13 +54,13 @@ function IdeaCard({ idea }: { idea: Idea }) {
       <div className="p-5 flex flex-col gap-4 flex-1">
         {/* Header Row: Ticker & Direction */}
         <div className="flex justify-between items-center">
-          <span className="text-lg font-bold text-slate-100 tracking-tight">{idea.ticker}</span>
+          <span className="text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">{idea.ticker}</span>
           <span
             className={clsx(
               "inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-bold uppercase tracking-wider border",
               {
-                "bg-emerald-500/10 text-emerald-400 border-emerald-500/20": idea.direction === 'Long',
-                "bg-rose-500/10 text-rose-400 border-rose-500/20": idea.direction === 'Short',
+                "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20": idea.direction === 'Long',
+                "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20": idea.direction === 'Short',
               }
             )}
           >
@@ -71,17 +74,41 @@ function IdeaCard({ idea }: { idea: Idea }) {
         </div>
 
         {/* Title */}
-        <h3 className="text-base font-semibold text-slate-200 leading-snug">
+        <h3 className="text-base font-semibold text-slate-800 dark:text-slate-200 leading-snug">
           {idea.title || `${idea.direction} on ${idea.ticker}`}
         </h3>
 
+        {/* Price Tracking Row */}
+        {(idea.entry_price || idea.stop_loss || idea.take_profit) && (
+          <div className="grid grid-cols-3 gap-2 bg-slate-50 dark:bg-slate-950/40 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800/50 text-center text-xs font-mono">
+            <div>
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-semibold">Entry</div>
+              <div className="text-slate-800 dark:text-slate-200 mt-0.5 font-semibold">
+                {idea.entry_price !== null && idea.entry_price !== undefined ? parseFloat(idea.entry_price as string).toFixed(5).replace(/\.?0+$/, '') : '—'}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-semibold">SL</div>
+              <div className="text-rose-600 dark:text-rose-400 mt-0.5 font-semibold">
+                {idea.stop_loss !== null && idea.stop_loss !== undefined ? parseFloat(idea.stop_loss as string).toFixed(5).replace(/\.?0+$/, '') : '—'}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] text-slate-500 dark:text-slate-400 font-sans uppercase font-semibold">TP</div>
+              <div className="text-emerald-600 dark:text-emerald-400 mt-0.5 font-semibold">
+                {idea.take_profit !== null && idea.take_profit !== undefined ? parseFloat(idea.take_profit as string).toFixed(5).replace(/\.?0+$/, '') : '—'}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Bottom Metadata */}
-        <div className="mt-auto pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-800/60">
-          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800 text-slate-300">
+        <div className="mt-auto pt-4 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800/60">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
             {idea.setup_type}
           </span>
           <div className="flex items-center gap-3">
-            <span className="text-xs text-slate-500 font-mono">
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
               {idea.created_at ? new Date(idea.created_at).toLocaleDateString() : 'Just now'}
             </span>
             <span
@@ -114,16 +141,16 @@ export default async function TradeIdeasFeed() {
   }
 
   return (
-    <div className="w-full flex-col flex text-gray-100 p-2 sm:p-4">
+    <div className="w-full flex-col flex text-slate-900 dark:text-gray-100 p-2 sm:p-4">
       {/* Live Pricing Widget */}
       <PricingWidget />
 
       <div className="mb-8 flex items-center justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
             Trade Ideas Feed
           </h1>
-          <p className="text-slate-400 mt-2 text-sm max-w-2xl">
+          <p className="text-slate-600 dark:text-slate-400 mt-2 text-sm max-w-2xl">
             Track and review potential setups, chart annotations, and ongoing market hypotheses.
           </p>
         </div>

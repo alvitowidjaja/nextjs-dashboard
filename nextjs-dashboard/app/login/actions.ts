@@ -56,3 +56,9 @@ export async function authenticate(formData: FormData) {
         redirect('/dashboard');
     }
 }
+
+export async function logout() {
+    const cookieStore = await cookies();
+    cookieStore.delete('basekamp_token');
+    redirect('/login');
+}

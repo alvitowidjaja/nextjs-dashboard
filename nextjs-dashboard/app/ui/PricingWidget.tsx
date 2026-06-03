@@ -21,23 +21,23 @@ export default async function PricingWidget() {
     console.error(error);
   }
 
-  if (isError) return (<div className="w-full bg-slate-900 border border-red-900 rounded-lg p-6 mb-8 text-center text-red-500 font-bold">⚠️ Live Pricing Engine is currently offline.</div>);
+  if (isError) return (<div className="w-full bg-red-50 dark:bg-slate-900 border border-red-200 dark:border-red-900 rounded-lg p-6 mb-8 text-center text-red-600 dark:text-red-500 font-bold">⚠️ Live Pricing Engine is currently offline.</div>);
 
   return (
-    <div className="w-full bg-slate-900 text-white border border-slate-700 rounded-xl p-4 mb-8 shadow-lg">
-      <h2 className="text-lg font-bold mb-4 text-slate-200">Live Market Pricing</h2>
+    <div className="w-full bg-white dark:bg-[#111e2f] text-slate-900 dark:text-white border border-slate-200 dark:border-none rounded-xl p-4 mb-8 shadow-lg">
+      <h2 className="text-lg font-bold mb-4 text-slate-800 dark:text-slate-200">Live Market Pricing</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {prices?.map((item) => (
-          <div key={item.ticker} className="bg-slate-800 border border-slate-700 rounded-lg p-4 flex flex-col justify-between hover:border-slate-600 transition-colors">
+          <div key={item.ticker} className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
             <div className="flex justify-between items-center mb-3">
-              <span className="font-bold text-lg tracking-tight">{item.ticker}</span>
-              <span className="text-[10px] uppercase tracking-wider font-bold bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">
+              <span className="font-bold text-lg tracking-tight text-slate-900 dark:text-white">{item.ticker}</span>
+              <span className="text-[10px] uppercase tracking-wider font-bold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-full">
                 {item.session}
               </span>
             </div>
             <div className="flex justify-between items-end">
-              <span className="text-xl font-mono font-medium text-emerald-400">{item.price}</span>
-              <span className="text-xs text-slate-400 font-medium">Spread: {item.spread}</span>
+              <span className="text-xl font-mono font-medium text-emerald-600 dark:text-emerald-400">{item.price}</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Spread: {item.spread}</span>
             </div>
           </div>
         ))}
