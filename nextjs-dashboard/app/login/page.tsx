@@ -1,9 +1,14 @@
-import { redirect } from 'next/navigation';
+'use client';
+
+import { useActionState } from 'react';
 import ThemeBox from '@/app/dashboard/ThemeBox';
 import { authenticate } from '@/app/login/actions';
 import Link from 'next/link';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
 export default function LoginPage() {
+  const [state, formAction, isPending] = useActionState(authenticate, undefined);
+
   return (
     <main className="relative flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950 p-4">
       <Link
@@ -26,7 +31,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form action={authenticate} className="space-y-6">
+        <form action={formAction} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="username">
               Username
@@ -55,14 +60,23 @@ export default function LoginPage() {
             />
           </div>
 
+          {state?.message && (
+            <div className="flex items-center gap-2 text-red-500 bg-red-50 dark:bg-red-950/50 p-3 border border-red-200 dark:border-red-800 rounded-lg" aria-live="polite">
+              <ExclamationCircleIcon className="h-5 w-5 flex-shrink-0" />
+              <p className="text-sm">{state.message}</p>
+            </div>
+          )}
+
           <button
             type="submit"
-            className="mt-6 w-full flex justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 active:scale-[0.98] shadow-md hover:shadow-lg"
+            aria-disabled={isPending}
+            className="mt-6 w-full flex justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 active:scale-[0.98] shadow-md hover:shadow-lg disabled:opacity-50"
           >
-            Log In
+            {isPending ? 'Logging in...' : 'Log In'}
           </button>
         </form>
       </div>
     </main>
   );
 }
+

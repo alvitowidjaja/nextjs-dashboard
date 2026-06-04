@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const token = request.cookies.get('basekamp_token')?.value;
   const isTryingToAccessDashboard = request.nextUrl.pathname.startsWith('/dashboard');
   const isTryingToAccessLogin = request.nextUrl.pathname.startsWith('/login');

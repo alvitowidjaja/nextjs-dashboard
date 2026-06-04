@@ -3,9 +3,15 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 
-export async function authenticate(formData: FormData) {
-    const extractedUsername = formData.get('username') as string;
-    const extractedPassword = formData.get('password') as string;
+export async function authenticate(
+    prevState: any,
+    formData: FormData
+) {
+    // Safety fallback: detect the actual FormData regardless of argument position
+    const data = (formData && typeof formData.get === 'function') ? formData : prevState;
+
+    const extractedUsername = data.get('username') as string;
+    const extractedPassword = data.get('password') as string;
     const apiUrl = `${process.env.BASEKAMP_API_URL}/admin/auth`;
 
     // 1. We create a flag to track if we should let them in
@@ -23,7 +29,13 @@ export async function authenticate(formData: FormData) {
             }).toString(),
         });
 
-        const responseData = await response.json();
+        let responseData;
+        try {
+            responseData = await response.json();
+        } catch (parseError) {
+            console.log("Login Error State: Non-JSON response", parseError);
+            responseData = {};
+        }
 
         if (response.ok) {
             console.log("✅ Login Successful! Setting cookies...");
@@ -43,12 +55,14 @@ export async function authenticate(formData: FormData) {
             shouldRedirect = true;
 
         } else {
-            console.log("🚨 Login Failed:", responseData.message?.en);
-            return;
+            const errorMsg = responseData.message?.en || "Invalid username or password. Please try again.";
+            console.log("Login Error State:", errorMsg);
+            return { message: errorMsg };
         }
 
     } catch (error) {
         console.error("🔥 Network Error:", error);
+        return { message: "Failed to connect to the server." };
     }
 
     // 3. Teleport OUTSIDE of the try/catch block!
