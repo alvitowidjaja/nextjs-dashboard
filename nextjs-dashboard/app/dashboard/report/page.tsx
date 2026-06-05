@@ -33,7 +33,21 @@ export default function ReportPage() {
     setGenerating(true);
     setGenerationError(null);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reports/macro`, { cache: 'no-store' });
+      // Clear any stale cached report before requesting a fresh one
+      if (typeof window !== 'undefined') {
+        sessionStorage.removeItem('macro_technical_report');
+      }
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reports/macro`, {
+        method: 'POST',
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+        },
+        body: JSON.stringify({ forceRefresh: true }),
+      });
       if (!response.ok) {
         throw new Error('Failed to generate AI macro report');
       }
