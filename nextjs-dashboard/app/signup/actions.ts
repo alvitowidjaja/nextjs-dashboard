@@ -11,7 +11,7 @@ export async function registerUser(
 
     const extractedUsername = data.get('username') as string;
     const extractedPassword = data.get('password') as string;
-    const apiUrl = 'http://localhost:4000/api/auth/signup';
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`;
 
     // Flag to track if we should redirect (must happen outside try/catch)
     let shouldRedirect = false;
