@@ -2,12 +2,12 @@
 
 import { useActionState } from 'react';
 import ThemeBox from '@/app/dashboard/ThemeBox';
-import { authenticate } from '@/app/login/actions';
+import { registerUser } from '@/app/signup/actions';
 import Link from 'next/link';
 import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
 
-export default function LoginPage() {
-  const [state, formAction, isPending] = useActionState(authenticate, undefined);
+export default function SignUpPage() {
+  const [state, formAction, isPending] = useActionState(registerUser, undefined);
 
   return (
     <main className="relative flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-950 p-4">
@@ -24,37 +24,37 @@ export default function LoginPage() {
       <div className="w-full max-w-md rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-xl border border-gray-200 dark:border-gray-800 transition-colors">
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50 mb-2">
-            Welcome Back
+            Create Account
           </h1>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Log in to your account to continue
+            Sign up for a new account to get started
           </p>
         </div>
 
         <form action={formAction} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="username">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="signup-username">
               Username
             </label>
             <input
               className="peer block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm outline-none placeholder:text-gray-500 text-gray-900 dark:text-gray-100 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30"
-              id="username"
+              id="signup-username"
               type="text"
               name="username"
-              placeholder="Enter your username"
+              placeholder="Choose a username"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="password">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" htmlFor="signup-password">
               Password
             </label>
             <input
               className="peer block w-full rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 py-3 px-4 text-sm outline-none placeholder:text-gray-500 text-gray-900 dark:text-gray-100 transition-all focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-500/30"
-              id="password"
+              id="signup-password"
               type="password"
               name="password"
-              placeholder="Enter password"
+              placeholder="Create a password"
               required
               minLength={6}
             />
@@ -72,21 +72,20 @@ export default function LoginPage() {
             aria-disabled={isPending}
             className="mt-6 w-full flex justify-center rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 active:scale-[0.98] shadow-md hover:shadow-lg disabled:opacity-50"
           >
-            {isPending ? 'Logging in...' : 'Log In'}
+            {isPending ? 'Creating account...' : 'Sign Up'}
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
-          Don&apos;t have an account?{' '}
+          Already have an account?{' '}
           <Link
-            href="/signup"
+            href="/login"
             className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
           >
-            Sign up
+            Log in
           </Link>
         </p>
       </div>
     </main>
   );
 }
-

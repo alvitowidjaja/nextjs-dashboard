@@ -5,13 +5,14 @@ export function proxy(request: NextRequest) {
   const token = request.cookies.get('basekamp_token')?.value;
   const isTryingToAccessDashboard = request.nextUrl.pathname.startsWith('/dashboard');
   const isTryingToAccessLogin = request.nextUrl.pathname.startsWith('/login');
+  const isTryingToAccessSignup = request.nextUrl.pathname.startsWith('/signup');
 
   if (isTryingToAccessDashboard && !token) {
     console.log("🚨 Trespasser blocked! Redirecting to login.");
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  if (isTryingToAccessLogin && token) {
+  if ((isTryingToAccessLogin || isTryingToAccessSignup) && token) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
@@ -19,5 +20,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/login'],
+  matcher: ['/dashboard/:path*', '/login', '/signup'],
 };
