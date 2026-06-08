@@ -1,7 +1,5 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 export async function registerUser(
     prevState: any,
     formData: FormData
@@ -12,9 +10,6 @@ export async function registerUser(
     const extractedUsername = data.get('username') as string;
     const extractedPassword = data.get('password') as string;
     const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`;
-
-    // Flag to track if we should redirect (must happen outside try/catch)
-    let shouldRedirect = false;
 
     try {
         const response = await fetch(apiUrl, {
@@ -37,8 +32,11 @@ export async function registerUser(
         }
 
         if (response.ok && responseData.success) {
-            console.log("✅ Signup Successful! Redirecting to login...");
-            shouldRedirect = true;
+            console.log("✅ Signup Successful!");
+            return {
+                success: true,
+                message: "Account created successfully! Redirecting to login...",
+            };
 
         } else {
             // Handle specific error messages from the backend
@@ -46,16 +44,12 @@ export async function registerUser(
                 || responseData.error
                 || "Registration failed. Please try again.";
             console.log("Signup Error State:", errorMsg);
-            return { message: errorMsg };
+            return { success: false, message: errorMsg };
         }
 
     } catch (error) {
         console.error("🔥 Network Error:", error);
-        return { message: "Failed to connect to the server. Is the backend running?" };
-    }
-
-    // Redirect OUTSIDE of the try/catch block (Next.js redirect throws internally)
-    if (shouldRedirect) {
-        redirect('/login');
+        return { success: false, message: "Failed to connect to the server. Is the backend running?" };
     }
 }
+

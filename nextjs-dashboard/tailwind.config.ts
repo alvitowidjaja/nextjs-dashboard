@@ -58,6 +58,20 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-1rem)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        shrink: {
+          '0%': { width: '100%' },
+          '100%': { width: '0%' },
+        },
+      },
+      animation: {
+        slideDown: 'slideDown 0.4s ease-out',
+        shrink: 'shrink 2s linear forwards',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
